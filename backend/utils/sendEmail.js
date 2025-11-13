@@ -37,15 +37,14 @@ export const transporter = nodemailer.createTransport({
   },
 });
 
-// Verify connection configuration
-if (process.env.NODE_ENV !== "production") {
-  console.log("[mail] transporter created:", { 
-    host: host || "NOT SET", 
-    port, 
-    user: user ? "****" : "NOT SET",
-    configured: isSmtpConfigured 
-  });
-}
+// Verify connection configuration - log in all environments
+console.log("[mail] transporter created:", { 
+  host: host || "NOT SET", 
+  port, 
+  user: user ? "****" : "NOT SET",
+  configured: isSmtpConfigured,
+  from: fromDefault
+});
 
 // Verify transporter connection on startup (only in production or when explicitly enabled)
 if (isSmtpConfigured && process.env.VERIFY_SMTP_ON_STARTUP !== "false") {
@@ -92,11 +91,14 @@ export async function sendEmail({ to, subject, html, text, replyTo }) {
 
     const info = await withTimeout(sendPromise, timeoutMs);
 
-    if (process.env.NODE_ENV !== "production") {
-      console.log("[mail] sent:", info.messageId);
-    } else {
-      console.log("[mail] email sent successfully to:", to);
-    }
+    // Log in all environments with more details
+    console.log("[mail] email sent successfully:", {
+      to,
+      messageId: info.messageId,
+      response: info.response,
+      accepted: info.accepted,
+      rejected: info.rejected,
+    });
     return info;
   } catch (error) {
     console.error("[mail] sendEmail error:", {

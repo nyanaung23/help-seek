@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { User } from "../models/User.js";
 import { Otp } from "../models/Otp.js";
-import { sendVerificationEmail } from "../utils/sendEmail.js";
+import { sendVerificationEmail, sendEmail } from "../utils/sendEmail.js";
 
 const router = express.Router();
 
@@ -71,14 +71,22 @@ router.post(
       // Return success immediately to avoid blocking the request
       sendVerificationEmail("signup", { to: email, name: "", code })
         .then((info) => {
-          if (process.env.NODE_ENV !== "production") {
-            console.log("[mail] signup code sent:", info.messageId);
-          } else {
-            console.log("[mail] signup code sent successfully to:", email);
-          }
+          console.log("[mail] signup code sent successfully:", {
+            email,
+            messageId: info.messageId,
+            response: info.response,
+          });
         })
         .catch((err) => {
-          console.error("[mail] signup code failed:", err.message);
+          console.error("[mail] signup code failed:", {
+            email,
+            error: err.message,
+            code: err.code,
+            command: err.command,
+            response: err.response,
+            responseCode: err.responseCode,
+            stack: err.stack,
+          });
           // Delete the OTP since email failed
           Otp.deleteOne({ email, type: "SIGNUP" }).catch((deleteErr) => {
             console.error("[mail] Failed to delete OTP after email error:", deleteErr.message);
@@ -268,14 +276,22 @@ router.post(
       // Return success immediately to avoid blocking the request
       sendVerificationEmail("forgot", { to: email, name: user?.name || "", code })
         .then((info) => {
-          if (process.env.NODE_ENV !== "production") {
-            console.log("[mail] forgot code sent:", info.messageId);
-          } else {
-            console.log("[mail] forgot code sent successfully to:", email);
-          }
+          console.log("[mail] forgot code sent successfully:", {
+            email,
+            messageId: info.messageId,
+            response: info.response,
+          });
         })
         .catch((err) => {
-          console.error("[mail] forgot code failed:", err.message);
+          console.error("[mail] forgot code failed:", {
+            email,
+            error: err.message,
+            code: err.code,
+            command: err.command,
+            response: err.response,
+            responseCode: err.responseCode,
+            stack: err.stack,
+          });
           // Delete the OTP since email failed
           Otp.deleteOne({ email, type: "FORGOT" }).catch((deleteErr) => {
             console.error("[mail] Failed to delete OTP after email error:", deleteErr.message);
@@ -402,5 +418,49 @@ router.post(
     }
   }
 );
+
+// Diagnostic endpoint to test email sending (only in non-production or with auth)
+router.post("/test-email", body("email").isEmail(), async (req, res, next) => {
+  try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ message: "Invalid email", errors: errors.array() });
+    }
+
+    const testEmail = String(req.body.email).trim().toLowerCase();
+    const testCode = "12345";
+
+    console.log("[mail] Testing email send to:", testEmail);
+
+    try {
+      const info = await sendVerificationEmail("signup", { to: testEmail, name: "Test User", code: testCode });
+      return res.json({
+        success: true,
+        message: "Test email sent successfully",
+        details: {
+          messageId: info.messageId,
+          response: info.response,
+          accepted: info.accepted,
+          rejected: info.rejected,
+        },
+      });
+    } catch (emailErr) {
+      console.error("[mail] Test email failed:", emailErr);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to send test email",
+        error: emailErr.message,
+        details: {
+          code: emailErr.code,
+          command: emailErr.command,
+          response: emailErr.response,
+          responseCode: emailErr.responseCode,
+        },
+      });
+    }
+  } catch (err) {
+    next(err);
+  }
+});
 
 export default router;
