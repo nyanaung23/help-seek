@@ -1,0 +1,856 @@
+0 verbose cli /Users/nyanaung/.nvm/versions/node/v22.12.0/bin/node /Users/nyanaung/.nvm/versions/node/v22.12.0/bin/npm
+1 info using npm@10.9.0
+2 info using node@v22.12.0
+3 silly config load:file:/Users/nyanaung/.nvm/versions/node/v22.12.0/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/nyanaung/repos/help-seek/backend/.npmrc
+5 silly config load:file:/Users/nyanaung/.npmrc
+6 silly config load:file:/Users/nyanaung/.nvm/versions/node/v22.12.0/etc/npmrc
+7 verbose title npm install sharp@^0.33.4
+8 verbose argv "install" "sharp@^0.33.4" "--cache" "./npm-cache"
+9 verbose logfile logs-max:10 dir:/Users/nyanaung/repos/help-seek/backend/npm-cache/_logs/2025-11-13T12_52_36_869Z-
+10 verbose logfile /Users/nyanaung/repos/help-seek/backend/npm-cache/_logs/2025-11-13T12_52_36_869Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:4345298944 maxSize:1086324736 maxEntrySize:543162368
+13 silly idealTree buildDeps
+14 silly fetch manifest sharp@^0.33.4
+15 silly packumentCache full:https://registry.npmjs.org/sharp cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/sharp 102ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/sharp set size:undefined disposed:false
+18 silly placeDep ROOT sharp@0.33.5 OK for: backend@1.0.0 want: ^0.33.4
+19 silly fetch manifest color@^4.2.3
+20 silly packumentCache full:https://registry.npmjs.org/color cache-miss
+21 silly fetch manifest detect-libc@^2.0.3
+22 silly packumentCache full:https://registry.npmjs.org/detect-libc cache-miss
+23 silly fetch manifest @img/sharp-wasm32@0.33.5
+24 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-wasm32 cache-miss
+25 silly fetch manifest @img/sharp-linux-arm@0.33.5
+26 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm cache-miss
+27 silly fetch manifest @img/sharp-linux-x64@0.33.5
+28 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-x64 cache-miss
+29 silly fetch manifest @img/sharp-win32-x64@0.33.5
+30 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-x64 cache-miss
+31 silly fetch manifest @img/sharp-darwin-x64@0.33.5
+32 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-x64 cache-miss
+33 silly fetch manifest @img/sharp-win32-ia32@0.33.5
+34 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-ia32 cache-miss
+35 silly fetch manifest @img/sharp-linux-arm64@0.33.5
+36 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm64 cache-miss
+37 silly fetch manifest @img/sharp-linux-s390x@0.33.5
+38 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-s390x cache-miss
+39 http fetch GET 200 https://registry.npmjs.org/npm 167ms
+40 http fetch GET 200 https://registry.npmjs.org/color 44ms (cache miss)
+41 silly packumentCache full:https://registry.npmjs.org/color set size:undefined disposed:false
+42 silly fetch manifest @img/sharp-darwin-arm64@0.33.5
+43 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-arm64 cache-miss
+44 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-darwin-arm64 44ms (cache miss)
+45 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-arm64 set size:undefined disposed:false
+46 silly fetch manifest @img/sharp-linuxmusl-x64@0.33.5
+47 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-x64 cache-miss
+48 http fetch GET 200 https://registry.npmjs.org/detect-libc 89ms (cache miss)
+49 silly packumentCache full:https://registry.npmjs.org/detect-libc set size:undefined disposed:false
+50 silly fetch manifest @img/sharp-linuxmusl-arm64@0.33.5
+51 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-arm64 cache-miss
+52 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-arm 100ms (cache miss)
+53 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm set size:undefined disposed:false
+54 silly fetch manifest @img/sharp-libvips-linux-arm@1.0.5
+55 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm cache-miss
+56 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linuxmusl-x64 107ms (cache miss)
+57 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-x64 set size:undefined disposed:false
+58 silly fetch manifest @img/sharp-libvips-linux-x64@1.0.4
+59 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-x64 cache-miss
+60 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-x64 197ms (cache miss)
+61 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-x64 set size:undefined disposed:false
+62 silly fetch manifest @img/sharp-libvips-darwin-x64@1.0.4
+63 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-x64 cache-miss
+64 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-arm64 198ms (cache miss)
+65 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-arm64 set size:undefined disposed:false
+66 silly fetch manifest @img/sharp-libvips-linux-arm64@1.0.4
+67 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm64 cache-miss
+68 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-darwin-x64 199ms (cache miss)
+69 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-darwin-x64 set size:undefined disposed:false
+70 silly fetch manifest @img/sharp-libvips-linux-s390x@1.0.4
+71 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-s390x cache-miss
+72 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-wasm32 199ms (cache miss)
+73 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-wasm32 set size:undefined disposed:false
+74 silly fetch manifest @img/sharp-libvips-darwin-arm64@1.0.4
+75 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-arm64 cache-miss
+76 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-win32-x64 200ms (cache miss)
+77 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-x64 set size:undefined disposed:false
+78 silly fetch manifest @img/sharp-libvips-linuxmusl-x64@1.0.4
+79 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-x64 cache-miss
+80 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linuxmusl-arm64 112ms (cache miss)
+81 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linuxmusl-arm64 set size:undefined disposed:false
+82 silly fetch manifest @img/sharp-libvips-linuxmusl-arm64@1.0.4
+83 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-arm64 cache-miss
+84 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm 140ms (cache miss)
+85 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm set size:undefined disposed:false
+86 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-darwin-x64 48ms (cache miss)
+87 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-x64 set size:undefined disposed:false
+88 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-x64 50ms (cache miss)
+89 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-x64 set size:undefined disposed:false
+90 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-x64 61ms (cache miss)
+91 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-x64 set size:undefined disposed:false
+92 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-darwin-arm64 61ms (cache miss)
+93 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-darwin-arm64 set size:undefined disposed:false
+94 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm64 68ms (cache miss)
+95 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-arm64 set size:undefined disposed:false
+96 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-linux-s390x 316ms (cache miss)
+97 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-linux-s390x set size:undefined disposed:false
+98 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-arm64 114ms (cache miss)
+99 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linuxmusl-arm64 set size:undefined disposed:false
+100 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-win32-ia32 355ms (cache miss)
+101 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-win32-ia32 set size:undefined disposed:false
+102 http fetch GET 200 https://registry.npmjs.org/@img%2fsharp-libvips-linux-s390x 257ms (cache miss)
+103 silly packumentCache full:https://registry.npmjs.org/@img%2fsharp-libvips-linux-s390x set size:undefined disposed:false
+104 silly placeDep ROOT @img/sharp-darwin-arm64@0.33.5 OK for: sharp@0.33.5 want: 0.33.5
+105 silly placeDep ROOT @img/sharp-darwin-x64@0.33.5 OK for: sharp@0.33.5 want: 0.33.5
+106 silly placeDep ROOT @img/sharp-libvips-darwin-arm64@1.0.4 OK for: sharp@0.33.5 want: 1.0.4
+107 silly placeDep ROOT @img/sharp-libvips-darwin-x64@1.0.4 OK for: sharp@0.33.5 want: 1.0.4
+108 silly placeDep ROOT @img/sharp-libvips-linux-arm@1.0.5 OK for: sharp@0.33.5 want: 1.0.5
+109 silly placeDep ROOT @img/sharp-libvips-linux-arm64@1.0.4 OK for: sharp@0.33.5 want: 1.0.4
+110 silly placeDep ROOT @img/sharp-libvips-linux-s390x@1.0.4 OK for: sharp@0.33.5 want: 1.0.4
+111 silly placeDep ROOT @img/sharp-libvips-linux-x64@1.0.4 OK for: sharp@0.33.5 want: 1.0.4
+112 silly placeDep ROOT @img/sharp-libvips-linuxmusl-arm64@1.0.4 OK for: sharp@0.33.5 want: 1.0.4
+113 silly placeDep ROOT @img/sharp-libvips-linuxmusl-x64@1.0.4 OK for: sharp@0.33.5 want: 1.0.4
+114 silly placeDep ROOT @img/sharp-linux-arm@0.33.5 OK for: sharp@0.33.5 want: 0.33.5
+115 silly placeDep ROOT @img/sharp-linux-arm64@0.33.5 OK for: sharp@0.33.5 want: 0.33.5
+116 silly placeDep ROOT @img/sharp-linux-s390x@0.33.5 OK for: sharp@0.33.5 want: 0.33.5
+117 silly placeDep ROOT @img/sharp-linux-x64@0.33.5 OK for: sharp@0.33.5 want: 0.33.5
+118 silly placeDep ROOT @img/sharp-linuxmusl-arm64@0.33.5 OK for: sharp@0.33.5 want: 0.33.5
+119 silly placeDep ROOT @img/sharp-linuxmusl-x64@0.33.5 OK for: sharp@0.33.5 want: 0.33.5
+120 silly placeDep ROOT @img/sharp-wasm32@0.33.5 OK for: sharp@0.33.5 want: 0.33.5
+121 silly placeDep ROOT @img/sharp-win32-ia32@0.33.5 OK for: sharp@0.33.5 want: 0.33.5
+122 silly placeDep ROOT @img/sharp-win32-x64@0.33.5 OK for: sharp@0.33.5 want: 0.33.5
+123 silly placeDep ROOT color@4.2.3 OK for: sharp@0.33.5 want: ^4.2.3
+124 silly placeDep ROOT detect-libc@2.1.2 OK for: sharp@0.33.5 want: ^2.0.3
+125 silly fetch manifest @emnapi/runtime@^1.2.0
+126 silly packumentCache full:https://registry.npmjs.org/@emnapi%2fruntime cache-miss
+127 silly fetch manifest color-string@^1.9.0
+128 silly packumentCache full:https://registry.npmjs.org/color-string cache-miss
+129 http fetch GET 200 https://registry.npmjs.org/color-string 33ms (cache miss)
+130 silly packumentCache full:https://registry.npmjs.org/color-string set size:undefined disposed:false
+131 http fetch GET 200 https://registry.npmjs.org/@emnapi%2fruntime 44ms (cache miss)
+132 silly packumentCache full:https://registry.npmjs.org/@emnapi%2fruntime set size:undefined disposed:false
+133 silly placeDep ROOT @emnapi/runtime@1.7.0 OK for: @img/sharp-wasm32@0.33.5 want: ^1.2.0
+134 silly fetch manifest tslib@^2.4.0
+135 silly packumentCache full:https://registry.npmjs.org/tslib cache-miss
+136 http fetch GET 200 https://registry.npmjs.org/tslib 27ms (cache miss)
+137 silly packumentCache full:https://registry.npmjs.org/tslib set size:undefined disposed:false
+138 silly placeDep ROOT tslib@2.8.1 OK for: @emnapi/runtime@1.7.0 want: ^2.4.0
+139 silly placeDep ROOT color-string@1.9.1 OK for: color@4.2.3 want: ^1.9.0
+140 silly fetch manifest simple-swizzle@^0.2.2
+141 silly packumentCache full:https://registry.npmjs.org/simple-swizzle cache-miss
+142 http fetch GET 200 https://registry.npmjs.org/simple-swizzle 28ms (cache miss)
+143 silly packumentCache full:https://registry.npmjs.org/simple-swizzle set size:undefined disposed:false
+144 silly placeDep ROOT simple-swizzle@0.2.4 OK for: color-string@1.9.1 want: ^0.2.2
+145 silly fetch manifest is-arrayish@^0.3.1
+146 silly packumentCache full:https://registry.npmjs.org/is-arrayish cache-miss
+147 http fetch GET 200 https://registry.npmjs.org/is-arrayish 49ms (cache miss)
+148 silly packumentCache full:https://registry.npmjs.org/is-arrayish set size:undefined disposed:false
+149 silly placeDep ROOT is-arrayish@0.3.4 OK for: simple-swizzle@0.2.4 want: ^0.3.1
+150 silly reify mark retired [
+150 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@google-cloud/promisify'
+150 silly reify ]
+151 silly reify mark retired [
+151 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@google-cloud/vision'
+151 silly reify ]
+152 silly reify mark retired [
+152 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@grpc/grpc-js'
+152 silly reify ]
+153 silly reify mark retired [
+153 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@grpc/proto-loader',
+153 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/.bin/proto-loader-gen-types'
+153 silly reify ]
+154 silly reify mark retired [
+154 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@js-sdsl/ordered-map'
+154 silly reify ]
+155 silly reify mark retired [
+155 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/aspromise'
+155 silly reify ]
+156 silly reify mark retired [
+156 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/base64'
+156 silly reify ]
+157 silly reify mark retired [
+157 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/codegen'
+157 silly reify ]
+158 silly reify mark retired [
+158 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/eventemitter'
+158 silly reify ]
+159 silly reify mark retired [
+159 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/fetch'
+159 silly reify ]
+160 silly reify mark retired [
+160 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/float'
+160 silly reify ]
+161 silly reify mark retired [
+161 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/inquire'
+161 silly reify ]
+162 silly reify mark retired [
+162 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/path'
+162 silly reify ]
+163 silly reify mark retired [
+163 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/pool'
+163 silly reify ]
+164 silly reify mark retired [
+164 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/utf8'
+164 silly reify ]
+165 silly reify mark retired [
+165 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@tootallnate/once'
+165 silly reify ]
+166 silly reify mark retired [
+166 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/caseless'
+166 silly reify ]
+167 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/long' ]
+168 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/node' ]
+169 silly reify mark retired [
+169 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/request'
+169 silly reify ]
+170 silly reify mark retired [
+170 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/tough-cookie'
+170 silly reify ]
+171 silly reify mark retired [
+171 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/abort-controller'
+171 silly reify ]
+172 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/agent-base' ]
+173 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/ansi-regex' ]
+174 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/ansi-styles' ]
+175 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/append-field' ]
+176 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/asynckit' ]
+177 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/base64-js' ]
+178 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/buffer-from' ]
+179 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/busboy' ]
+180 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/cliui' ]
+181 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/cloudinary' ]
+182 silly reify mark retired [
+182 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/combined-stream'
+182 silly reify ]
+183 silly reify mark retired [
+183 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/concat-stream'
+183 silly reify ]
+184 silly reify mark retired [
+184 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/delayed-stream'
+184 silly reify ]
+185 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/duplexify' ]
+186 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/emoji-regex' ]
+187 silly reify mark retired [
+187 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/end-of-stream'
+187 silly reify ]
+188 silly reify mark retired [
+188 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/es-set-tostringtag'
+188 silly reify ]
+189 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/escalade' ]
+190 silly reify mark retired [
+190 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/event-target-shim'
+190 silly reify ]
+191 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/form-data' ]
+192 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/gaxios' ]
+193 silly reify mark retired [
+193 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/get-caller-file'
+193 silly reify ]
+194 silly reify mark retired [
+194 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/google-auth-library'
+194 silly reify ]
+195 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/google-gax' ]
+196 silly reify mark retired [
+196 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/google-logging-utils'
+196 silly reify ]
+197 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/gtoken' ]
+198 silly reify mark retired [
+198 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/has-tostringtag'
+198 silly reify ]
+199 silly reify mark retired [
+199 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/http-proxy-agent'
+199 silly reify ]
+200 silly reify mark retired [
+200 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/https-proxy-agent'
+200 silly reify ]
+201 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/is' ]
+202 silly reify mark retired [
+202 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/is-fullwidth-code-point'
+202 silly reify ]
+203 silly reify mark retired [
+203 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/lodash.camelcase'
+203 silly reify ]
+204 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/long' ]
+205 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/minimist' ]
+206 silly reify mark retired [
+206 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/mkdirp',
+206 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/.bin/mkdirp'
+206 silly reify ]
+207 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/multer' ]
+208 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/object-hash' ]
+209 silly reify mark retired [
+209 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/proto3-json-serializer'
+209 silly reify ]
+210 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/protobufjs' ]
+211 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/q' ]
+212 silly reify mark retired [
+212 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/readable-stream'
+212 silly reify ]
+213 silly reify mark retired [
+213 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/require-directory'
+213 silly reify ]
+214 silly reify mark retired [
+214 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/retry-request'
+214 silly reify ]
+215 silly reify mark retired [
+215 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/stream-events'
+215 silly reify ]
+216 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/stream-shift' ]
+217 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/streamifier' ]
+218 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/streamsearch' ]
+219 silly reify mark retired [
+219 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/string_decoder'
+219 silly reify ]
+220 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/string-width' ]
+221 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/strip-ansi' ]
+222 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/stubs' ]
+223 silly reify mark retired [
+223 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/teeny-request'
+223 silly reify ]
+224 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/typedarray' ]
+225 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/undici-types' ]
+226 silly reify mark retired [
+226 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/util-deprecate'
+226 silly reify ]
+227 silly reify mark retired [
+227 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/uuid',
+227 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/.bin/uuid'
+227 silly reify ]
+228 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/wrap-ansi' ]
+229 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/xtend' ]
+230 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/y18n' ]
+231 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/yargs' ]
+232 silly reify mark retired [ '/Users/nyanaung/repos/help-seek/backend/node_modules/yargs-parser' ]
+233 silly reify moves {
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@google-cloud/promisify': '/Users/nyanaung/repos/help-seek/backend/node_modules/@google-cloud/.promisify-L39OnpHj',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@google-cloud/vision': '/Users/nyanaung/repos/help-seek/backend/node_modules/@google-cloud/.vision-YhGhhXdh',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@grpc/grpc-js': '/Users/nyanaung/repos/help-seek/backend/node_modules/@grpc/.grpc-js-IkEmG0Rv',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@grpc/proto-loader': '/Users/nyanaung/repos/help-seek/backend/node_modules/@grpc/.proto-loader-PFyM9XAW',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/.bin/proto-loader-gen-types': '/Users/nyanaung/repos/help-seek/backend/node_modules/.bin/.proto-loader-gen-types-dgfzfWcO',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@js-sdsl/ordered-map': '/Users/nyanaung/repos/help-seek/backend/node_modules/@js-sdsl/.ordered-map-eT0pMoaE',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/aspromise': '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/.aspromise-ecAmS43k',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/base64': '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/.base64-k4GXwLLV',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/codegen': '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/.codegen-nAjunUEL',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/eventemitter': '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/.eventemitter-rDJEo8oX',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/fetch': '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/.fetch-fAM8P9sB',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/float': '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/.float-P2OzWdbq',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/inquire': '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/.inquire-QiA5bmWd',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/path': '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/.path-G6DyFwx9',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/pool': '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/.pool-Si9C15dN',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/utf8': '/Users/nyanaung/repos/help-seek/backend/node_modules/@protobufjs/.utf8-kFJ9avtZ',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@tootallnate/once': '/Users/nyanaung/repos/help-seek/backend/node_modules/@tootallnate/.once-6LSkhNtp',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/caseless': '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/.caseless-287wgThh',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/long': '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/.long-DrxLJP9d',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/node': '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/.node-CR822h2f',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/request': '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/.request-HFrV7BGP',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/tough-cookie': '/Users/nyanaung/repos/help-seek/backend/node_modules/@types/.tough-cookie-URZgkrtF',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/abort-controller': '/Users/nyanaung/repos/help-seek/backend/node_modules/.abort-controller-sphTx864',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/agent-base': '/Users/nyanaung/repos/help-seek/backend/node_modules/.agent-base-f51mktkb',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/ansi-regex': '/Users/nyanaung/repos/help-seek/backend/node_modules/.ansi-regex-RyZ1W4U3',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/ansi-styles': '/Users/nyanaung/repos/help-seek/backend/node_modules/.ansi-styles-KMp92iCF',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/append-field': '/Users/nyanaung/repos/help-seek/backend/node_modules/.append-field-atpQ4yV5',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/asynckit': '/Users/nyanaung/repos/help-seek/backend/node_modules/.asynckit-qUgeZBLF',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/base64-js': '/Users/nyanaung/repos/help-seek/backend/node_modules/.base64-js-3tI2hWRr',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/buffer-from': '/Users/nyanaung/repos/help-seek/backend/node_modules/.buffer-from-ILyhY7BA',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/busboy': '/Users/nyanaung/repos/help-seek/backend/node_modules/.busboy-TXFmsBKe',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/cliui': '/Users/nyanaung/repos/help-seek/backend/node_modules/.cliui-pMzxPNJ2',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/cloudinary': '/Users/nyanaung/repos/help-seek/backend/node_modules/.cloudinary-ZAjCdfkh',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/combined-stream': '/Users/nyanaung/repos/help-seek/backend/node_modules/.combined-stream-vsPzLAYW',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/concat-stream': '/Users/nyanaung/repos/help-seek/backend/node_modules/.concat-stream-TCQowcSb',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/delayed-stream': '/Users/nyanaung/repos/help-seek/backend/node_modules/.delayed-stream-z5xXlp7J',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/duplexify': '/Users/nyanaung/repos/help-seek/backend/node_modules/.duplexify-0pE2Rvy6',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/emoji-regex': '/Users/nyanaung/repos/help-seek/backend/node_modules/.emoji-regex-BVAHvRIr',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/end-of-stream': '/Users/nyanaung/repos/help-seek/backend/node_modules/.end-of-stream-MKYIBUeT',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/es-set-tostringtag': '/Users/nyanaung/repos/help-seek/backend/node_modules/.es-set-tostringtag-RxjRziM0',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/escalade': '/Users/nyanaung/repos/help-seek/backend/node_modules/.escalade-zM05N61i',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/event-target-shim': '/Users/nyanaung/repos/help-seek/backend/node_modules/.event-target-shim-Ort5yiHS',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/form-data': '/Users/nyanaung/repos/help-seek/backend/node_modules/.form-data-aePb7DeK',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/gaxios': '/Users/nyanaung/repos/help-seek/backend/node_modules/.gaxios-Xqwoad00',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/get-caller-file': '/Users/nyanaung/repos/help-seek/backend/node_modules/.get-caller-file-1jhunojc',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/google-auth-library': '/Users/nyanaung/repos/help-seek/backend/node_modules/.google-auth-library-xOvvNP0o',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/google-gax': '/Users/nyanaung/repos/help-seek/backend/node_modules/.google-gax-8RmLa2n9',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/google-logging-utils': '/Users/nyanaung/repos/help-seek/backend/node_modules/.google-logging-utils-zVs4U4ph',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/gtoken': '/Users/nyanaung/repos/help-seek/backend/node_modules/.gtoken-Oe9YwMNj',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/has-tostringtag': '/Users/nyanaung/repos/help-seek/backend/node_modules/.has-tostringtag-Dh5YB8qg',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/http-proxy-agent': '/Users/nyanaung/repos/help-seek/backend/node_modules/.http-proxy-agent-LryKgayd',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/https-proxy-agent': '/Users/nyanaung/repos/help-seek/backend/node_modules/.https-proxy-agent-ygWMh9Tj',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/is': '/Users/nyanaung/repos/help-seek/backend/node_modules/.is-KqyDYYo9',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/is-fullwidth-code-point': '/Users/nyanaung/repos/help-seek/backend/node_modules/.is-fullwidth-code-point-WKzKJRkz',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/lodash.camelcase': '/Users/nyanaung/repos/help-seek/backend/node_modules/.lodash.camelcase-CyWi7wuz',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/long': '/Users/nyanaung/repos/help-seek/backend/node_modules/.long-tatUIJBo',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/minimist': '/Users/nyanaung/repos/help-seek/backend/node_modules/.minimist-nWPXFyu7',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/mkdirp': '/Users/nyanaung/repos/help-seek/backend/node_modules/.mkdirp-sRSQVjki',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/.bin/mkdirp': '/Users/nyanaung/repos/help-seek/backend/node_modules/.bin/.mkdirp-cv5aYox4',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/multer': '/Users/nyanaung/repos/help-seek/backend/node_modules/.multer-r1oQbGtX',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/object-hash': '/Users/nyanaung/repos/help-seek/backend/node_modules/.object-hash-zbkNWWZQ',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/proto3-json-serializer': '/Users/nyanaung/repos/help-seek/backend/node_modules/.proto3-json-serializer-40fbIigu',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/protobufjs': '/Users/nyanaung/repos/help-seek/backend/node_modules/.protobufjs-9MeNaJVx',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/q': '/Users/nyanaung/repos/help-seek/backend/node_modules/.q-GHmCFACJ',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/readable-stream': '/Users/nyanaung/repos/help-seek/backend/node_modules/.readable-stream-eFlCPTPo',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/require-directory': '/Users/nyanaung/repos/help-seek/backend/node_modules/.require-directory-x2G68j1M',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/retry-request': '/Users/nyanaung/repos/help-seek/backend/node_modules/.retry-request-raw75xG2',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/stream-events': '/Users/nyanaung/repos/help-seek/backend/node_modules/.stream-events-0peRoczy',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/stream-shift': '/Users/nyanaung/repos/help-seek/backend/node_modules/.stream-shift-NhOqINB4',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/streamifier': '/Users/nyanaung/repos/help-seek/backend/node_modules/.streamifier-G8Bbo4r8',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/streamsearch': '/Users/nyanaung/repos/help-seek/backend/node_modules/.streamsearch-qsgf14Cj',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/string_decoder': '/Users/nyanaung/repos/help-seek/backend/node_modules/.string_decoder-WbMJ3sS4',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/string-width': '/Users/nyanaung/repos/help-seek/backend/node_modules/.string-width-QVgpaCTl',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/strip-ansi': '/Users/nyanaung/repos/help-seek/backend/node_modules/.strip-ansi-S2u0CA1k',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/stubs': '/Users/nyanaung/repos/help-seek/backend/node_modules/.stubs-KeQstvrQ',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/teeny-request': '/Users/nyanaung/repos/help-seek/backend/node_modules/.teeny-request-Y7h8XxxA',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/typedarray': '/Users/nyanaung/repos/help-seek/backend/node_modules/.typedarray-SREkQYXO',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/undici-types': '/Users/nyanaung/repos/help-seek/backend/node_modules/.undici-types-yhP5NTPM',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/util-deprecate': '/Users/nyanaung/repos/help-seek/backend/node_modules/.util-deprecate-oC6JgRaj',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/uuid': '/Users/nyanaung/repos/help-seek/backend/node_modules/.uuid-Jb30L4Yc',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/.bin/uuid': '/Users/nyanaung/repos/help-seek/backend/node_modules/.bin/.uuid-2RgZUnWr',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/wrap-ansi': '/Users/nyanaung/repos/help-seek/backend/node_modules/.wrap-ansi-KFMiFL47',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/xtend': '/Users/nyanaung/repos/help-seek/backend/node_modules/.xtend-uydnMgvC',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/y18n': '/Users/nyanaung/repos/help-seek/backend/node_modules/.y18n-fsFvmVef',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/yargs': '/Users/nyanaung/repos/help-seek/backend/node_modules/.yargs-6ARg293c',
+233 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/yargs-parser': '/Users/nyanaung/repos/help-seek/backend/node_modules/.yargs-parser-FZPCewnt'
+233 silly reify }
+234 silly audit bulk request {
+234 silly audit   '@mongodb-js/saslprep': [ '1.3.0' ],
+234 silly audit   '@types/webidl-conversions': [ '7.0.3' ],
+234 silly audit   '@types/whatwg-url': [ '11.0.5' ],
+234 silly audit   accepts: [ '2.0.0' ],
+234 silly audit   'agent-base': [ '6.0.2' ],
+234 silly audit   anymatch: [ '3.1.3' ],
+234 silly audit   'balanced-match': [ '1.0.2' ],
+234 silly audit   'basic-auth': [ '2.0.1' ],
+234 silly audit   'safe-buffer': [ '5.1.2', '5.2.1' ],
+234 silly audit   bcrypt: [ '6.0.0' ],
+234 silly audit   bcryptjs: [ '3.0.2' ],
+234 silly audit   'bignumber.js': [ '9.3.1' ],
+234 silly audit   'binary-extensions': [ '2.3.0' ],
+234 silly audit   'body-parser': [ '2.2.0' ],
+234 silly audit   'brace-expansion': [ '1.1.12' ],
+234 silly audit   braces: [ '3.0.3' ],
+234 silly audit   bson: [ '6.10.4' ],
+234 silly audit   'buffer-equal-constant-time': [ '1.0.1' ],
+234 silly audit   bytes: [ '3.1.2' ],
+234 silly audit   'call-bind-apply-helpers': [ '1.0.2' ],
+234 silly audit   'call-bound': [ '1.0.4' ],
+234 silly audit   chokidar: [ '3.6.0' ],
+234 silly audit   'color-convert': [ '2.0.1' ],
+234 silly audit   'color-name': [ '1.1.4' ],
+234 silly audit   'concat-map': [ '0.0.1' ],
+234 silly audit   'content-disposition': [ '1.0.0' ],
+234 silly audit   'content-type': [ '1.0.5' ],
+234 silly audit   cookie: [ '0.7.2' ],
+234 silly audit   'cookie-parser': [ '1.4.7' ],
+234 silly audit   'cookie-signature': [ '1.0.6', '1.2.2' ],
+234 silly audit   cors: [ '2.8.5' ],
+234 silly audit   debug: [ '4.4.3', '2.6.9' ],
+234 silly audit   depd: [ '2.0.0' ],
+234 silly audit   dotenv: [ '17.2.2' ],
+234 silly audit   'dunder-proto': [ '1.0.1' ],
+234 silly audit   'ecdsa-sig-formatter': [ '1.0.11' ],
+234 silly audit   'ee-first': [ '1.1.1' ],
+234 silly audit   encodeurl: [ '2.0.0' ],
+234 silly audit   'es-define-property': [ '1.0.1' ],
+234 silly audit   'es-errors': [ '1.3.0' ],
+234 silly audit   'es-object-atoms': [ '1.1.1' ],
+234 silly audit   'escape-html': [ '1.0.3' ],
+234 silly audit   etag: [ '1.8.1' ],
+234 silly audit   express: [ '5.1.0' ],
+234 silly audit   'express-validator': [ '7.2.1' ],
+234 silly audit   validator: [ '13.12.0', '13.15.15' ],
+234 silly audit   extend: [ '3.0.2' ],
+234 silly audit   'fill-range': [ '7.1.1' ],
+234 silly audit   finalhandler: [ '2.1.0' ],
+234 silly audit   'mime-db': [ '1.54.0' ],
+234 silly audit   'mime-types': [ '3.0.1' ],
+234 silly audit   forwarded: [ '0.2.0' ],
+234 silly audit   fresh: [ '2.0.0' ],
+234 silly audit   fsevents: [ '2.3.3' ],
+234 silly audit   'function-bind': [ '1.1.2' ],
+234 silly audit   gaxios: [ '5.1.3' ],
+234 silly audit   'gcp-metadata': [ '5.3.0' ],
+234 silly audit   'https-proxy-agent': [ '5.0.1' ],
+234 silly audit   'get-intrinsic': [ '1.3.0' ],
+234 silly audit   'get-proto': [ '1.0.1' ],
+234 silly audit   'glob-parent': [ '5.1.2' ],
+234 silly audit   jwa: [ '1.4.2' ],
+234 silly audit   jws: [ '3.2.2' ],
+234 silly audit   gopd: [ '1.2.0' ],
+234 silly audit   'has-flag': [ '3.0.0' ],
+234 silly audit   'has-symbols': [ '1.1.0' ],
+234 silly audit   hasown: [ '2.0.2' ],
+234 silly audit   'http-errors': [ '2.0.0' ],
+234 silly audit   statuses: [ '2.0.1', '2.0.2' ],
+234 silly audit   'iconv-lite': [ '0.6.3', '0.7.0' ],
+234 silly audit   'ignore-by-default': [ '1.0.1' ],
+234 silly audit   inherits: [ '2.0.4' ],
+234 silly audit   'ipaddr.js': [ '1.9.1' ],
+234 silly audit   'is-binary-path': [ '2.1.0' ],
+234 silly audit   'is-extglob': [ '2.1.1' ],
+234 silly audit   'is-glob': [ '4.0.3' ],
+234 silly audit   'is-number': [ '7.0.0' ],
+234 silly audit   'is-promise': [ '4.0.0' ],
+234 silly audit   'is-stream': [ '2.0.1' ],
+234 silly audit   'json-bigint': [ '1.0.0' ],
+234 silly audit   jsonwebtoken: [ '9.0.2' ],
+234 silly audit   kareem: [ '2.6.3' ],
+234 silly audit   lodash: [ '4.17.21' ],
+234 silly audit   'lodash.includes': [ '4.3.0' ],
+234 silly audit   'lodash.isboolean': [ '3.0.3' ],
+234 silly audit   'lodash.isinteger': [ '4.0.4' ],
+234 silly audit   'lodash.isnumber': [ '3.0.3' ],
+234 silly audit   'lodash.isplainobject': [ '4.0.6' ],
+234 silly audit   'lodash.isstring': [ '4.0.1' ],
+234 silly audit   'lodash.once': [ '4.1.1' ],
+234 silly audit   'math-intrinsics': [ '1.1.0' ],
+234 silly audit   'media-typer': [ '1.1.0' ],
+234 silly audit   'memory-pager': [ '1.5.0' ],
+234 silly audit   'merge-descriptors': [ '2.0.0' ],
+234 silly audit   minimatch: [ '3.1.2' ],
+234 silly audit   mongodb: [ '6.18.0' ],
+234 silly audit   'mongodb-connection-string-url': [ '3.0.2' ],
+234 silly audit   mongoose: [ '8.18.1' ],
+234 silly audit   morgan: [ '1.10.1' ],
+234 silly audit   ms: [ '2.0.0', '2.1.3' ],
+234 silly audit   'on-finished': [ '2.3.0', '2.4.1' ],
+234 silly audit   mpath: [ '0.9.0' ],
+234 silly audit   mquery: [ '5.0.0' ],
+234 silly audit   'type-is': [ '2.0.1' ],
+234 silly audit   negotiator: [ '1.0.0' ],
+234 silly audit   'node-addon-api': [ '8.5.0' ],
+234 silly audit   'node-fetch': [ '2.7.0' ],
+234 silly audit   tr46: [ '0.0.3', '5.1.1' ],
+234 silly audit   'webidl-conversions': [ '3.0.1', '7.0.0' ],
+234 silly audit   'whatwg-url': [ '5.0.0', '14.2.0' ],
+234 silly audit   'node-gyp-build': [ '4.8.4' ],
+234 silly audit   nodemailer: [ '7.0.6' ],
+234 silly audit   nodemon: [ '3.1.10' ],
+234 silly audit   'normalize-path': [ '3.0.0' ],
+234 silly audit   'object-assign': [ '4.1.1' ],
+234 silly audit   'object-inspect': [ '1.13.4' ],
+234 silly audit   'on-headers': [ '1.1.0' ],
+234 silly audit   once: [ '1.4.0' ],
+234 silly audit   parseurl: [ '1.3.3' ],
+234 silly audit   'path-to-regexp': [ '8.3.0' ],
+234 silly audit   picomatch: [ '2.3.1' ],
+234 silly audit   'proxy-addr': [ '2.0.7' ],
+234 silly audit   'pstree.remy': [ '1.1.8' ],
+234 silly audit   punycode: [ '2.3.1' ],
+234 silly audit   qs: [ '6.14.0' ],
+234 silly audit   'range-parser': [ '1.2.1' ],
+234 silly audit   'raw-body': [ '3.0.1' ],
+234 silly audit   readdirp: [ '3.6.0' ],
+234 silly audit   router: [ '2.2.0' ],
+234 silly audit   'safer-buffer': [ '2.1.2' ],
+234 silly audit   semver: [ '7.7.2' ],
+234 silly audit   send: [ '1.2.0' ],
+234 silly audit   'serve-static': [ '2.2.0' ],
+234 silly audit   setprototypeof: [ '1.2.0' ],
+234 silly audit   'side-channel': [ '1.1.0' ],
+234 silly audit   'side-channel-list': [ '1.0.0' ],
+234 silly audit   'side-channel-map': [ '1.0.1' ],
+234 silly audit   'side-channel-weakmap': [ '1.0.2' ],
+234 silly audit   sift: [ '17.1.3' ],
+234 silly audit   'simple-update-notifier': [ '2.0.0' ],
+234 silly audit   'sparse-bitfield': [ '3.0.3' ],
+234 silly audit   'supports-color': [ '5.5.0' ],
+234 silly audit   'to-regex-range': [ '5.0.1' ],
+234 silly audit   toidentifier: [ '1.0.1' ],
+234 silly audit   touch: [ '3.1.1' ],
+234 silly audit   undefsafe: [ '2.0.5' ],
+234 silly audit   unpipe: [ '1.0.0' ],
+234 silly audit   vary: [ '1.1.2' ],
+234 silly audit   wrappy: [ '1.0.2' ],
+234 silly audit   sharp: [ '0.33.5' ],
+234 silly audit   '@img/sharp-darwin-arm64': [ '0.33.5' ],
+234 silly audit   '@img/sharp-darwin-x64': [ '0.33.5' ],
+234 silly audit   '@img/sharp-libvips-darwin-arm64': [ '1.0.4' ],
+234 silly audit   '@img/sharp-libvips-darwin-x64': [ '1.0.4' ],
+234 silly audit   '@img/sharp-libvips-linux-arm': [ '1.0.5' ],
+234 silly audit   '@img/sharp-libvips-linux-arm64': [ '1.0.4' ],
+234 silly audit   '@img/sharp-libvips-linux-s390x': [ '1.0.4' ],
+234 silly audit   '@img/sharp-libvips-linux-x64': [ '1.0.4' ],
+234 silly audit   '@img/sharp-libvips-linuxmusl-arm64': [ '1.0.4' ],
+234 silly audit   '@img/sharp-libvips-linuxmusl-x64': [ '1.0.4' ],
+234 silly audit   '@img/sharp-linux-arm': [ '0.33.5' ],
+234 silly audit   '@img/sharp-linux-arm64': [ '0.33.5' ],
+234 silly audit   '@img/sharp-linux-s390x': [ '0.33.5' ],
+234 silly audit   '@img/sharp-linux-x64': [ '0.33.5' ],
+234 silly audit   '@img/sharp-linuxmusl-arm64': [ '0.33.5' ],
+234 silly audit   '@img/sharp-linuxmusl-x64': [ '0.33.5' ],
+234 silly audit   '@img/sharp-wasm32': [ '0.33.5' ],
+234 silly audit   '@img/sharp-win32-ia32': [ '0.33.5' ],
+234 silly audit   '@img/sharp-win32-x64': [ '0.33.5' ],
+234 silly audit   color: [ '4.2.3' ],
+234 silly audit   'detect-libc': [ '2.1.2' ],
+234 silly audit   '@emnapi/runtime': [ '1.7.0' ],
+234 silly audit   tslib: [ '2.8.1' ],
+234 silly audit   'color-string': [ '1.9.1' ],
+234 silly audit   'simple-swizzle': [ '0.2.4' ],
+234 silly audit   'is-arrayish': [ '0.3.4' ]
+234 silly audit }
+235 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-win32-x64
+236 silly reify mark deleted [
+236 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-win32-x64'
+236 silly reify ]
+237 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-win32-ia32
+238 silly reify mark deleted [
+238 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-win32-ia32'
+238 silly reify ]
+239 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-wasm32
+240 silly reify mark deleted [
+240 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-wasm32'
+240 silly reify ]
+241 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@emnapi/runtime
+242 silly reify mark deleted [
+242 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@emnapi/runtime'
+242 silly reify ]
+243 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/tslib
+244 silly reify mark deleted [ '/Users/nyanaung/repos/help-seek/backend/node_modules/tslib' ]
+245 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linuxmusl-x64
+246 silly reify mark deleted [
+246 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linuxmusl-x64'
+246 silly reify ]
+247 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linuxmusl-arm64
+248 silly reify mark deleted [
+248 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linuxmusl-arm64'
+248 silly reify ]
+249 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linux-x64
+250 silly reify mark deleted [
+250 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linux-x64'
+250 silly reify ]
+251 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linux-s390x
+252 silly reify mark deleted [
+252 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linux-s390x'
+252 silly reify ]
+253 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linux-arm64
+254 silly reify mark deleted [
+254 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linux-arm64'
+254 silly reify ]
+255 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linux-arm
+256 silly reify mark deleted [
+256 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-linux-arm'
+256 silly reify ]
+257 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linuxmusl-x64
+258 silly reify mark deleted [
+258 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linuxmusl-x64'
+258 silly reify ]
+259 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linuxmusl-arm64
+260 silly reify mark deleted [
+260 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linuxmusl-arm64'
+260 silly reify ]
+261 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linux-x64
+262 silly reify mark deleted [
+262 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linux-x64'
+262 silly reify ]
+263 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linux-s390x
+264 silly reify mark deleted [
+264 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linux-s390x'
+264 silly reify ]
+265 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linux-arm64
+266 silly reify mark deleted [
+266 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linux-arm64'
+266 silly reify ]
+267 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linux-arm
+268 silly reify mark deleted [
+268 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-linux-arm'
+268 silly reify ]
+269 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-darwin-x64
+270 silly reify mark deleted [
+270 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-libvips-darwin-x64'
+270 silly reify ]
+271 verbose reify failed optional dependency /Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-darwin-x64
+272 silly reify mark deleted [
+272 silly reify   '/Users/nyanaung/repos/help-seek/backend/node_modules/@img/sharp-darwin-x64'
+272 silly reify ]
+273 silly tarball no local data for is-arrayish@https://registry.npmjs.org/is-arrayish/-/is-arrayish-0.3.4.tgz. Extracting by manifest.
+274 silly tarball no local data for simple-swizzle@https://registry.npmjs.org/simple-swizzle/-/simple-swizzle-0.2.4.tgz. Extracting by manifest.
+275 silly tarball no local data for color-string@https://registry.npmjs.org/color-string/-/color-string-1.9.1.tgz. Extracting by manifest.
+276 silly tarball no local data for tslib@https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz. Extracting by manifest.
+277 silly tarball no local data for @emnapi/runtime@https://registry.npmjs.org/@emnapi/runtime/-/runtime-1.7.0.tgz. Extracting by manifest.
+278 silly tarball no local data for detect-libc@https://registry.npmjs.org/detect-libc/-/detect-libc-2.1.2.tgz. Extracting by manifest.
+279 silly tarball no local data for color@https://registry.npmjs.org/color/-/color-4.2.3.tgz. Extracting by manifest.
+280 silly tarball no local data for @img/sharp-darwin-arm64@https://registry.npmjs.org/@img/sharp-darwin-arm64/-/sharp-darwin-arm64-0.33.5.tgz. Extracting by manifest.
+281 silly tarball no local data for sharp@https://registry.npmjs.org/sharp/-/sharp-0.33.5.tgz. Extracting by manifest.
+282 silly tarball no local data for @img/sharp-libvips-darwin-arm64@https://registry.npmjs.org/@img/sharp-libvips-darwin-arm64/-/sharp-libvips-darwin-arm64-1.0.4.tgz. Extracting by manifest.
+283 http fetch GET 200 https://registry.npmjs.org/color/-/color-4.2.3.tgz 112ms (cache miss)
+284 http fetch GET 200 https://registry.npmjs.org/is-arrayish/-/is-arrayish-0.3.4.tgz 114ms (cache miss)
+285 http fetch GET 200 https://registry.npmjs.org/detect-libc/-/detect-libc-2.1.2.tgz 113ms (cache miss)
+286 http fetch GET 200 https://registry.npmjs.org/color-string/-/color-string-1.9.1.tgz 114ms (cache miss)
+287 http fetch GET 200 https://registry.npmjs.org/simple-swizzle/-/simple-swizzle-0.2.4.tgz 115ms (cache miss)
+288 http fetch GET 200 https://registry.npmjs.org/tslib/-/tslib-2.8.1.tgz 118ms (cache miss)
+289 http fetch GET 200 https://registry.npmjs.org/@img/sharp-darwin-arm64/-/sharp-darwin-arm64-0.33.5.tgz 121ms (cache miss)
+290 http fetch GET 200 https://registry.npmjs.org/@emnapi/runtime/-/runtime-1.7.0.tgz 126ms (cache miss)
+291 http fetch GET 200 https://registry.npmjs.org/sharp/-/sharp-0.33.5.tgz 130ms (cache miss)
+292 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 144ms
+293 silly audit report {
+293 silly audit report   validator: [
+293 silly audit report     {
+293 silly audit report       id: 1109241,
+293 silly audit report       url: 'https://github.com/advisories/GHSA-9965-vmph-33xx',
+293 silly audit report       title: 'validator.js has a URL validation bypass vulnerability in its isURL function',
+293 silly audit report       severity: 'moderate',
+293 silly audit report       vulnerable_versions: '<13.15.20',
+293 silly audit report       cwe: [Array],
+293 silly audit report       cvss: [Object]
+293 silly audit report     }
+293 silly audit report   ],
+293 silly audit report   nodemailer: [
+293 silly audit report     {
+293 silly audit report       id: 1108571,
+293 silly audit report       url: 'https://github.com/advisories/GHSA-mm7p-fcc7-pg87',
+293 silly audit report       title: 'Nodemailer: Email to an unintended domain can occur due to Interpretation Conflict',
+293 silly audit report       severity: 'moderate',
+293 silly audit report       vulnerable_versions: '<7.0.7',
+293 silly audit report       cwe: [Array],
+293 silly audit report       cvss: [Object]
+293 silly audit report     }
+293 silly audit report   ]
+293 silly audit report }
+294 silly packumentCache corgi:https://registry.npmjs.org/validator cache-miss
+295 silly packumentCache corgi:https://registry.npmjs.org/nodemailer cache-miss
+296 http fetch GET 200 https://registry.npmjs.org/validator 47ms (cache miss)
+297 silly packumentCache corgi:https://registry.npmjs.org/validator set size:undefined disposed:false
+298 http fetch GET 200 https://registry.npmjs.org/nodemailer 63ms (cache miss)
+299 silly packumentCache corgi:https://registry.npmjs.org/nodemailer set size:undefined disposed:false
+300 silly packumentCache corgi:https://registry.npmjs.org/express-validator cache-miss
+301 http fetch GET 200 https://registry.npmjs.org/express-validator 62ms (cache miss)
+302 silly packumentCache corgi:https://registry.npmjs.org/express-validator set size:undefined disposed:false
+303 http fetch GET 200 https://registry.npmjs.org/@img/sharp-libvips-darwin-arm64/-/sharp-libvips-darwin-arm64-1.0.4.tgz 317ms (cache miss)
+304 info run sharp@0.33.5 install node_modules/sharp node install/check
+305 info run sharp@0.33.5 install { code: 0, signal: null }
+306 silly ADD node_modules/is-arrayish
+307 silly ADD node_modules/simple-swizzle
+308 silly ADD node_modules/color-string
+309 silly ADD
+310 silly ADD
+311 silly ADD node_modules/detect-libc
+312 silly ADD node_modules/color
+313 silly ADD
+314 silly ADD
+315 silly ADD
+316 silly ADD
+317 silly ADD
+318 silly ADD
+319 silly ADD
+320 silly ADD
+321 silly ADD
+322 silly ADD
+323 silly ADD
+324 silly ADD
+325 silly ADD
+326 silly ADD
+327 silly ADD
+328 silly ADD
+329 silly ADD node_modules/@img/sharp-libvips-darwin-arm64
+330 silly ADD
+331 silly ADD node_modules/@img/sharp-darwin-arm64
+332 silly ADD node_modules/sharp
+333 silly REMOVE node_modules/yargs-parser
+334 silly REMOVE node_modules/yargs
+335 silly REMOVE node_modules/y18n
+336 silly REMOVE node_modules/xtend
+337 silly REMOVE node_modules/wrap-ansi
+338 silly REMOVE node_modules/uuid
+339 silly REMOVE node_modules/util-deprecate
+340 silly REMOVE node_modules/undici-types
+341 silly REMOVE node_modules/typedarray
+342 silly REMOVE node_modules/teeny-request
+343 silly REMOVE node_modules/teeny-request/node_modules/https-proxy-agent
+344 silly REMOVE node_modules/teeny-request/node_modules/agent-base
+345 silly REMOVE node_modules/stubs
+346 silly REMOVE node_modules/strip-ansi
+347 silly REMOVE node_modules/string-width
+348 silly REMOVE node_modules/string_decoder
+349 silly REMOVE node_modules/streamsearch
+350 silly REMOVE node_modules/streamifier
+351 silly REMOVE node_modules/stream-shift
+352 silly REMOVE node_modules/stream-events
+353 silly REMOVE node_modules/retry-request
+354 silly REMOVE node_modules/require-directory
+355 silly REMOVE node_modules/readable-stream
+356 silly REMOVE node_modules/q
+357 silly REMOVE node_modules/protobufjs
+358 silly REMOVE node_modules/proto3-json-serializer
+359 silly REMOVE node_modules/object-hash
+360 silly REMOVE node_modules/multer
+361 silly REMOVE node_modules/multer/node_modules/type-is
+362 silly REMOVE node_modules/multer/node_modules/mime-types
+363 silly REMOVE node_modules/multer/node_modules/mime-db
+364 silly REMOVE node_modules/multer/node_modules/media-typer
+365 silly REMOVE node_modules/mkdirp
+366 silly REMOVE node_modules/minimist
+367 silly REMOVE node_modules/long
+368 silly REMOVE node_modules/lodash.camelcase
+369 silly REMOVE node_modules/is-fullwidth-code-point
+370 silly REMOVE node_modules/is
+371 silly REMOVE node_modules/https-proxy-agent
+372 silly REMOVE node_modules/http-proxy-agent
+373 silly REMOVE node_modules/http-proxy-agent/node_modules/agent-base
+374 silly REMOVE node_modules/has-tostringtag
+375 silly REMOVE node_modules/gtoken
+376 silly REMOVE node_modules/gtoken/node_modules/jws
+377 silly REMOVE node_modules/gtoken/node_modules/jwa
+378 silly REMOVE node_modules/google-logging-utils
+379 silly REMOVE node_modules/google-gax
+380 silly REMOVE node_modules/google-auth-library
+381 silly REMOVE node_modules/google-auth-library/node_modules/jws
+382 silly REMOVE node_modules/google-auth-library/node_modules/jwa
+383 silly REMOVE node_modules/google-auth-library/node_modules/gcp-metadata
+384 silly REMOVE node_modules/get-caller-file
+385 silly REMOVE node_modules/gaxios
+386 silly REMOVE node_modules/form-data
+387 silly REMOVE node_modules/form-data/node_modules/mime-types
+388 silly REMOVE node_modules/form-data/node_modules/mime-db
+389 silly REMOVE node_modules/event-target-shim
+390 silly REMOVE node_modules/escalade
+391 silly REMOVE node_modules/es-set-tostringtag
+392 silly REMOVE node_modules/end-of-stream
+393 silly REMOVE node_modules/emoji-regex
+394 silly REMOVE node_modules/duplexify
+395 silly REMOVE node_modules/delayed-stream
+396 silly REMOVE node_modules/concat-stream
+397 silly REMOVE node_modules/combined-stream
+398 silly REMOVE node_modules/cloudinary
+399 silly REMOVE node_modules/cliui
+400 silly REMOVE node_modules/busboy
+401 silly REMOVE node_modules/buffer-from
+402 silly REMOVE node_modules/base64-js
+403 silly REMOVE node_modules/asynckit
+404 silly REMOVE node_modules/append-field
+405 silly REMOVE node_modules/ansi-styles
+406 silly REMOVE node_modules/ansi-regex
+407 silly REMOVE node_modules/agent-base
+408 silly REMOVE node_modules/abort-controller
+409 silly REMOVE node_modules/@types/tough-cookie
+410 silly REMOVE node_modules/@types/request
+411 silly REMOVE node_modules/@types/node
+412 silly REMOVE node_modules/@types/long
+413 silly REMOVE node_modules/@types/caseless
+414 silly REMOVE node_modules/@tootallnate/once
+415 silly REMOVE node_modules/@protobufjs/utf8
+416 silly REMOVE node_modules/@protobufjs/pool
+417 silly REMOVE node_modules/@protobufjs/path
+418 silly REMOVE node_modules/@protobufjs/inquire
+419 silly REMOVE node_modules/@protobufjs/float
+420 silly REMOVE node_modules/@protobufjs/fetch
+421 silly REMOVE node_modules/@protobufjs/eventemitter
+422 silly REMOVE node_modules/@protobufjs/codegen
+423 silly REMOVE node_modules/@protobufjs/base64
+424 silly REMOVE node_modules/@protobufjs/aspromise
+425 silly REMOVE node_modules/@js-sdsl/ordered-map
+426 silly REMOVE node_modules/@grpc/proto-loader
+427 silly REMOVE node_modules/@grpc/grpc-js
+428 silly REMOVE node_modules/@grpc/grpc-js/node_modules/@grpc/proto-loader
+429 silly REMOVE node_modules/@google-cloud/vision
+430 silly REMOVE node_modules/@google-cloud/promisify
+431 verbose cwd /Users/nyanaung/repos/help-seek/backend
+432 verbose os Darwin 24.6.0
+433 verbose node v22.12.0
+434 verbose npm  v10.9.0
+435 notice
+435 notice New major version of npm available! 10.9.0 -> 11.6.2
+435 notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.2
+435 notice To update run: npm install -g npm@11.6.2
+435 notice  { force: true, [Symbol(proc-log.meta)]: true }
+436 verbose exit 0
+437 info ok

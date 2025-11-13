@@ -67,15 +67,20 @@ router.post(
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
 
-      sendVerificationEmail("signup", { to: email, name: "", code })
-        .then((info) => {
-          if (process.env.NODE_ENV !== "production") {
-            console.log("[mail] signup code queued:", info.messageId);
-          }
-        })
-        .catch((err) => {
-          console.error("[mail] signup code failed:", err.message);
-        });
+      // Send verification email and wait for it to complete
+      try {
+        const info = await sendVerificationEmail("signup", { to: email, name: "", code });
+        if (process.env.NODE_ENV !== "production") {
+          console.log("[mail] signup code sent:", info.messageId);
+        } else {
+          console.log("[mail] signup code sent successfully to:", email);
+        }
+      } catch (err) {
+        console.error("[mail] signup code failed:", err.message);
+        // Delete the OTP since email failed
+        await Otp.deleteOne({ email, type: "SIGNUP" });
+        throw createError(500, "Failed to send verification email. Please try again later.");
+      }
 
       return res.json({ message: "Code sent", next: "verify-code" });
     } catch (err) {
@@ -255,15 +260,20 @@ router.post(
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
 
-      sendVerificationEmail("forgot", { to: email, name: user?.name || "", code })
-        .then((info) => {
-          if (process.env.NODE_ENV !== "production") {
-            console.log("[mail] forgot code queued:", info.messageId);
-          }
-        })
-        .catch((err) => {
-          console.error("[mail] forgot code failed:", err.message);
-        });
+      // Send verification email and wait for it to complete
+      try {
+        const info = await sendVerificationEmail("forgot", { to: email, name: user?.name || "", code });
+        if (process.env.NODE_ENV !== "production") {
+          console.log("[mail] forgot code sent:", info.messageId);
+        } else {
+          console.log("[mail] forgot code sent successfully to:", email);
+        }
+      } catch (err) {
+        console.error("[mail] forgot code failed:", err.message);
+        // Delete the OTP since email failed
+        await Otp.deleteOne({ email, type: "FORGOT" });
+        throw createError(500, "Failed to send verification email. Please try again later.");
+      }
 
       return res.json({ message: "sent" });
     } catch (err) {

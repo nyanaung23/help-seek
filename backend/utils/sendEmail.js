@@ -8,6 +8,21 @@ const user = process.env.SMTP_USER;
 const pass = process.env.SMTP_PASS;
 const fromDefault = process.env.EMAIL_FROM || (user ? `Help N Seek <${user}>` : "helpnseek@gmail.com");
 
+// Validate SMTP configuration
+function validateSmtpConfig() {
+  if (!host) {
+    console.error("[mail] ERROR: SMTP_HOST is not set in environment variables");
+    return false;
+  }
+  if (!user || !pass) {
+    console.error("[mail] ERROR: SMTP_USER and SMTP_PASS must be set in environment variables");
+    return false;
+  }
+  return true;
+}
+
+const isSmtpConfigured = validateSmtpConfig();
+
 // Reuseable transporter
 export const transporter = nodemailer.createTransport({
   host,
@@ -21,7 +36,21 @@ export const transporter = nodemailer.createTransport({
 
 // Verify connection configuration
 if (process.env.NODE_ENV !== "production") {
-  console.log("[mail] transporter created:", { host, port, user: user ? "****" : undefined });
+  console.log("[mail] transporter created:", { 
+    host: host || "NOT SET", 
+    port, 
+    user: user ? "****" : "NOT SET",
+    configured: isSmtpConfigured 
+  });
+}
+
+// Verify transporter connection on startup (only in production or when explicitly enabled)
+if (isSmtpConfigured && process.env.VERIFY_SMTP_ON_STARTUP !== "false") {
+  transporter.verify().then(() => {
+    console.log("[mail] SMTP connection verified successfully");
+  }).catch((err) => {
+    console.error("[mail] SMTP connection verification failed:", err.message);
+  });
 }
 
 // Send email
@@ -30,19 +59,38 @@ export async function sendEmail({ to, subject, html, text, replyTo }) {
     throw new Error("sendEmail: 'to', 'subject', and 'html' are required");
   }
 
-  const info = await transporter.sendMail({
-    from: fromDefault,
-    to,
-    subject,
-    html,
-    text,
-    replyTo,
-  });
-
-  if (process.env.NODE_ENV !== "production") {
-    console.log("[mail] sent:", info.messageId);
+  if (!isSmtpConfigured) {
+    const error = new Error("SMTP is not configured. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS environment variables.");
+    console.error("[mail] sendEmail failed:", error.message);
+    throw error;
   }
-  return info;
+
+  try {
+    const info = await transporter.sendMail({
+      from: fromDefault,
+      to,
+      subject,
+      html,
+      text,
+      replyTo,
+    });
+
+    if (process.env.NODE_ENV !== "production") {
+      console.log("[mail] sent:", info.messageId);
+    } else {
+      console.log("[mail] email sent successfully to:", to);
+    }
+    return info;
+  } catch (error) {
+    console.error("[mail] sendEmail error:", {
+      to,
+      subject,
+      error: error.message,
+      code: error.code,
+      command: error.command,
+    });
+    throw error;
+  }
 }
 
 // Send verification email based on different kinds
