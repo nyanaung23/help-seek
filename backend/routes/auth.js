@@ -67,21 +67,25 @@ router.post(
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
 
-      // Send verification email and wait for it to complete
-      try {
-        const info = await sendVerificationEmail("signup", { to: email, name: "", code });
-        if (process.env.NODE_ENV !== "production") {
-          console.log("[mail] signup code sent:", info.messageId);
-        } else {
-          console.log("[mail] signup code sent successfully to:", email);
-        }
-      } catch (err) {
-        console.error("[mail] signup code failed:", err.message);
-        // Delete the OTP since email failed
-        await Otp.deleteOne({ email, type: "SIGNUP" });
-        throw createError(500, "Failed to send verification email. Please try again later.");
-      }
+      // Send verification email (non-blocking but with error handling)
+      // Return success immediately to avoid blocking the request
+      sendVerificationEmail("signup", { to: email, name: "", code })
+        .then((info) => {
+          if (process.env.NODE_ENV !== "production") {
+            console.log("[mail] signup code sent:", info.messageId);
+          } else {
+            console.log("[mail] signup code sent successfully to:", email);
+          }
+        })
+        .catch((err) => {
+          console.error("[mail] signup code failed:", err.message);
+          // Delete the OTP since email failed
+          Otp.deleteOne({ email, type: "SIGNUP" }).catch((deleteErr) => {
+            console.error("[mail] Failed to delete OTP after email error:", deleteErr.message);
+          });
+        });
 
+      // Return immediately - email is sent asynchronously
       return res.json({ message: "Code sent", next: "verify-code" });
     } catch (err) {
       next(err);
@@ -260,21 +264,25 @@ router.post(
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
 
-      // Send verification email and wait for it to complete
-      try {
-        const info = await sendVerificationEmail("forgot", { to: email, name: user?.name || "", code });
-        if (process.env.NODE_ENV !== "production") {
-          console.log("[mail] forgot code sent:", info.messageId);
-        } else {
-          console.log("[mail] forgot code sent successfully to:", email);
-        }
-      } catch (err) {
-        console.error("[mail] forgot code failed:", err.message);
-        // Delete the OTP since email failed
-        await Otp.deleteOne({ email, type: "FORGOT" });
-        throw createError(500, "Failed to send verification email. Please try again later.");
-      }
+      // Send verification email (non-blocking but with error handling)
+      // Return success immediately to avoid blocking the request
+      sendVerificationEmail("forgot", { to: email, name: user?.name || "", code })
+        .then((info) => {
+          if (process.env.NODE_ENV !== "production") {
+            console.log("[mail] forgot code sent:", info.messageId);
+          } else {
+            console.log("[mail] forgot code sent successfully to:", email);
+          }
+        })
+        .catch((err) => {
+          console.error("[mail] forgot code failed:", err.message);
+          // Delete the OTP since email failed
+          Otp.deleteOne({ email, type: "FORGOT" }).catch((deleteErr) => {
+            console.error("[mail] Failed to delete OTP after email error:", deleteErr.message);
+          });
+        });
 
+      // Return immediately - email is sent asynchronously
       return res.json({ message: "sent" });
     } catch (err) {
       next(err);

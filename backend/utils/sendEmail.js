@@ -29,6 +29,9 @@ export const transporter = nodemailer.createTransport({
   port,
   secure: port === 465,
   auth: user ? { user, pass } : undefined,
+  connectionTimeout: 10000, // 10 seconds to establish connection
+  socketTimeout: 30000, // 30 seconds for socket operations
+  greetingTimeout: 10000, // 10 seconds for SMTP greeting
   tls: {
     rejectUnauthorized: true,
   },
@@ -53,6 +56,16 @@ if (isSmtpConfigured && process.env.VERIFY_SMTP_ON_STARTUP !== "false") {
   });
 }
 
+// Helper function to add timeout to promises
+function withTimeout(promise, timeoutMs = 30000) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error(`Email sending timed out after ${timeoutMs}ms`)), timeoutMs)
+    ),
+  ]);
+}
+
 // Send email
 export async function sendEmail({ to, subject, html, text, replyTo }) {
   if (!to || !subject || !html) {
@@ -65,8 +78,10 @@ export async function sendEmail({ to, subject, html, text, replyTo }) {
     throw error;
   }
 
+  const timeoutMs = Number(process.env.SMTP_TIMEOUT || "30000"); // Default 30 seconds
+
   try {
-    const info = await transporter.sendMail({
+    const sendPromise = transporter.sendMail({
       from: fromDefault,
       to,
       subject,
@@ -74,6 +89,8 @@ export async function sendEmail({ to, subject, html, text, replyTo }) {
       text,
       replyTo,
     });
+
+    const info = await withTimeout(sendPromise, timeoutMs);
 
     if (process.env.NODE_ENV !== "production") {
       console.log("[mail] sent:", info.messageId);
