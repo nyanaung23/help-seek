@@ -501,7 +501,7 @@
 
 @media (max-width: 480px) {
   .inbox-navbar {
-    padding: 0.6rem 0.8rem;
+    padding: 1rem 2rem;
     background-size: 100vw 3rem;
   }
 

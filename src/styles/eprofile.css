@@ -180,8 +180,9 @@ select{
     }
 
     .eP-prev{
+        z-index: 100;
         left: 30px;
-        top: 10rem;
+        top: 8rem;
     }
 }
 

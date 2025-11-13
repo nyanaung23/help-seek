@@ -310,3 +310,22 @@
         max-width: 100%;
     }
 }
+
+@media (max-width: 480px){
+    .home-logo {
+        font-size: 1.1rem;
+    }
+
+    .home-searchbar{
+        padding: 4px 10px;
+        border: 2px solid var(--blue);
+    }
+
+    .home-search{
+        margin-right: -10px;
+    }
+
+    .home-second{
+        margin-top: -10px;
+    }
+}

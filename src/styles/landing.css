@@ -75,7 +75,7 @@
 
 @media (max-width: 480px){
   .Land1 .navbar{
-    padding: 0;
+    padding: 1rem 2rem;
     position: sticky;
     top: 0;
   }
@@ -96,8 +96,8 @@
   }
 
   .hero{
-    padding: 1rem 1rem 1rem 2rem;
-    height: 80vh;
+    padding: 0rem 1rem 0rem 2rem;
+    height: 90vh;
     text-align: left;
     justify-content: flex-end;
   }
