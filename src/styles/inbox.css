@@ -397,6 +397,61 @@
   margin-right: 12px;
 }
 
+/* Add these styles for date stamps */
+.date-stamp {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 16px 0;
+  position: relative;
+}
+
+.date-stamp span {
+  background: var(--bg);
+  color: var(--blue);
+  font-family: "Lato", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 12px;
+  border: 2px solid var(--blue);
+  opacity: 0.8;
+}
+
+.date-stamp::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--blue);
+  opacity: 0.2;
+  z-index: -1;
+}
+
+/* Mobile adjustments for date stamps */
+@media (max-width: 768px) {
+  .date-stamp {
+    margin: 16px 0 12px 0;
+  }
+
+  .date-stamp span {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .date-stamp {
+    margin: 12px 0 8px 0;
+  }
+
+  .date-stamp span {
+    font-size: 10px;
+    padding: 2px 8px;
+  }
+}
+
 @media (max-width: 768px) {
   .inbox-navbar {
     padding: 0.875rem 1rem;

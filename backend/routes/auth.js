@@ -67,34 +67,33 @@ router.post(
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
 
-      // Send verification email (non-blocking but with error handling)
-      // Return success immediately to avoid blocking the request
-      sendVerificationEmail("signup", { to: email, name: "", code })
-        .then((info) => {
-          console.log("[mail] signup code sent successfully:", {
-            email,
-            messageId: info.messageId,
-            response: info.response,
-          });
-        })
-        .catch((err) => {
-          console.error("[mail] signup code failed:", {
-            email,
-            error: err.message,
-            code: err.code,
-            command: err.command,
-            response: err.response,
-            responseCode: err.responseCode,
-            stack: err.stack,
-          });
-          // Delete the OTP since email failed
-          Otp.deleteOne({ email, type: "SIGNUP" }).catch((deleteErr) => {
-            console.error("[mail] Failed to delete OTP after email error:", deleteErr.message);
-          });
+      // Send verification email and wait for it to complete
+      // This ensures we catch errors and can inform the user if email fails
+      try {
+        const info = await sendVerificationEmail("signup", { to: email, name: "", code });
+        console.log("[mail] signup code sent successfully:", {
+          email,
+          messageId: info.messageId,
+          response: info.response,
         });
-
-      // Return immediately - email is sent asynchronously
-      return res.json({ message: "Code sent", next: "verify-code" });
+        return res.json({ message: "Code sent", next: "verify-code" });
+      } catch (err) {
+        console.error("[mail] signup code failed:", {
+          email,
+          error: err.message,
+          code: err.code,
+          command: err.command,
+          response: err.response,
+          responseCode: err.responseCode,
+          stack: err.stack,
+        });
+        // Delete the OTP since email failed
+        await Otp.deleteOne({ email, type: "SIGNUP" }).catch((deleteErr) => {
+          console.error("[mail] Failed to delete OTP after email error:", deleteErr.message);
+        });
+        // Return error to user so they know email failed
+        throw createError(500, "Failed to send verification email. Please check your email address and try again.");
+      }
     } catch (err) {
       next(err);
     }
@@ -272,34 +271,33 @@ router.post(
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
 
-      // Send verification email (non-blocking but with error handling)
-      // Return success immediately to avoid blocking the request
-      sendVerificationEmail("forgot", { to: email, name: user?.name || "", code })
-        .then((info) => {
-          console.log("[mail] forgot code sent successfully:", {
-            email,
-            messageId: info.messageId,
-            response: info.response,
-          });
-        })
-        .catch((err) => {
-          console.error("[mail] forgot code failed:", {
-            email,
-            error: err.message,
-            code: err.code,
-            command: err.command,
-            response: err.response,
-            responseCode: err.responseCode,
-            stack: err.stack,
-          });
-          // Delete the OTP since email failed
-          Otp.deleteOne({ email, type: "FORGOT" }).catch((deleteErr) => {
-            console.error("[mail] Failed to delete OTP after email error:", deleteErr.message);
-          });
+      // Send verification email and wait for it to complete
+      // This ensures we catch errors and can inform the user if email fails
+      try {
+        const info = await sendVerificationEmail("forgot", { to: email, name: user?.name || "", code });
+        console.log("[mail] forgot code sent successfully:", {
+          email,
+          messageId: info.messageId,
+          response: info.response,
         });
-
-      // Return immediately - email is sent asynchronously
-      return res.json({ message: "sent" });
+        return res.json({ message: "sent" });
+      } catch (err) {
+        console.error("[mail] forgot code failed:", {
+          email,
+          error: err.message,
+          code: err.code,
+          command: err.command,
+          response: err.response,
+          responseCode: err.responseCode,
+          stack: err.stack,
+        });
+        // Delete the OTP since email failed
+        await Otp.deleteOne({ email, type: "FORGOT" }).catch((deleteErr) => {
+          console.error("[mail] Failed to delete OTP after email error:", deleteErr.message);
+        });
+        // Return error to user so they know email failed
+        return res.status(500).json({ message: "Failed to send verification email. Please try again later." });
+      }
     } catch (err) {
       next(err);
     }

@@ -23,36 +23,47 @@ function validateSmtpConfig() {
 
 const isSmtpConfigured = validateSmtpConfig();
 
-// Reuseable transporter
-export const transporter = nodemailer.createTransport({
-  host,
-  port,
-  secure: port === 465,
-  auth: user ? { user, pass } : undefined,
-  connectionTimeout: 10000, // 10 seconds to establish connection
-  socketTimeout: 30000, // 30 seconds for socket operations
-  greetingTimeout: 10000, // 10 seconds for SMTP greeting
-  tls: {
-    rejectUnauthorized: true,
-  },
-});
+// Reuseable transporter - only create if properly configured
+export const transporter = isSmtpConfigured
+  ? nodemailer.createTransport({
+      host,
+      port,
+      secure: port === 465,
+      auth: { user, pass },
+      connectionTimeout: 10000, // 10 seconds to establish connection
+      socketTimeout: 30000, // 30 seconds for socket operations
+      greetingTimeout: 10000, // 10 seconds for SMTP greeting
+      tls: {
+        rejectUnauthorized: process.env.NODE_ENV === "production", // Only reject in production
+      },
+    })
+  : null;
 
 // Verify connection configuration - log in all environments
-console.log("[mail] transporter created:", { 
+console.log("[mail] transporter status:", { 
   host: host || "NOT SET", 
   port, 
   user: user ? "****" : "NOT SET",
   configured: isSmtpConfigured,
-  from: fromDefault
+  from: fromDefault,
+  environment: process.env.NODE_ENV || "development"
 });
 
-// Verify transporter connection on startup (only in production or when explicitly enabled)
-if (isSmtpConfigured && process.env.VERIFY_SMTP_ON_STARTUP !== "false") {
+// Verify transporter connection on startup (only when configured and not explicitly disabled)
+if (isSmtpConfigured && transporter && process.env.VERIFY_SMTP_ON_STARTUP !== "false") {
   transporter.verify().then(() => {
     console.log("[mail] SMTP connection verified successfully");
   }).catch((err) => {
-    console.error("[mail] SMTP connection verification failed:", err.message);
+    console.error("[mail] SMTP connection verification failed:", {
+      message: err.message,
+      code: err.code,
+      command: err.command,
+      response: err.response,
+      responseCode: err.responseCode,
+    });
   });
+} else if (!isSmtpConfigured) {
+  console.warn("[mail] WARNING: SMTP is not configured. Email sending will fail. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS environment variables.");
 }
 
 // Helper function to add timeout to promises
@@ -71,7 +82,7 @@ export async function sendEmail({ to, subject, html, text, replyTo }) {
     throw new Error("sendEmail: 'to', 'subject', and 'html' are required");
   }
 
-  if (!isSmtpConfigured) {
+  if (!isSmtpConfigured || !transporter) {
     const error = new Error("SMTP is not configured. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS environment variables.");
     console.error("[mail] sendEmail failed:", error.message);
     throw error;
