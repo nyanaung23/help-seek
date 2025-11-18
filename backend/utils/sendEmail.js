@@ -30,12 +30,18 @@ export const transporter = isSmtpConfigured
       port,
       secure: port === 465,
       auth: { user, pass },
-      connectionTimeout: 10000, // 10 seconds to establish connection
+      connectionTimeout: 15000, // 15 seconds to establish connection
       socketTimeout: 30000, // 30 seconds for socket operations
       greetingTimeout: 10000, // 10 seconds for SMTP greeting
       tls: {
-        rejectUnauthorized: process.env.NODE_ENV === "production", // Only reject in production
+        // Allow self-signed certificates - many SMTP services use them
+        // Set SMTP_REJECT_UNAUTHORIZED=true to enforce strict certificate validation
+        rejectUnauthorized: process.env.SMTP_REJECT_UNAUTHORIZED === "true",
       },
+      // Additional options for better compatibility
+      pool: true, // Use connection pooling
+      maxConnections: 1,
+      maxMessages: 3,
     })
   : null;
 
@@ -60,10 +66,20 @@ if (isSmtpConfigured && transporter && process.env.VERIFY_SMTP_ON_STARTUP !== "f
       command: err.command,
       response: err.response,
       responseCode: err.responseCode,
+      host: host,
+      port: port,
+      user: user ? "***" : "NOT SET",
     });
+    console.warn("[mail] WARNING: SMTP verification failed, but transporter will still attempt to send emails. Check your SMTP configuration.");
   });
 } else if (!isSmtpConfigured) {
-  console.warn("[mail] WARNING: SMTP is not configured. Email sending will fail. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS environment variables.");
+  console.error("[mail] ERROR: SMTP is not configured. Email sending will fail.");
+  console.error("[mail] Required environment variables:");
+  console.error("[mail]   - SMTP_HOST (e.g., smtp.gmail.com, smtp.railway.app)");
+  console.error("[mail]   - SMTP_PORT (e.g., 587 for TLS, 465 for SSL)");
+  console.error("[mail]   - SMTP_USER (your SMTP username/email)");
+  console.error("[mail]   - SMTP_PASS (your SMTP password or app password)");
+  console.error("[mail] Optional: EMAIL_FROM (defaults to SMTP_USER), SMTP_REJECT_UNAUTHORIZED (default: false)");
 }
 
 // Helper function to add timeout to promises
@@ -112,13 +128,42 @@ export async function sendEmail({ to, subject, html, text, replyTo }) {
     });
     return info;
   } catch (error) {
-    console.error("[mail] sendEmail error:", {
+    // Enhanced error logging for production debugging
+    const errorDetails = {
       to,
       subject,
       error: error.message,
       code: error.code,
       command: error.command,
-    });
+      response: error.response,
+      responseCode: error.responseCode,
+      host: host || "NOT SET",
+      port: port || "NOT SET",
+      user: user ? "***" : "NOT SET",
+      configured: isSmtpConfigured,
+    };
+    
+    console.error("[mail] sendEmail error:", errorDetails);
+    
+    // Provide more helpful error messages
+    if (!isSmtpConfigured) {
+      const configError = new Error("SMTP is not configured. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS environment variables in your deployment platform.");
+      configError.code = "SMTP_NOT_CONFIGURED";
+      throw configError;
+    }
+    
+    if (error.code === "ECONNREFUSED" || error.code === "ETIMEDOUT") {
+      const connError = new Error(`Failed to connect to SMTP server at ${host}:${port}. Check your SMTP_HOST and SMTP_PORT settings.`);
+      connError.code = error.code;
+      throw connError;
+    }
+    
+    if (error.responseCode === 535 || error.message?.includes("authentication")) {
+      const authError = new Error("SMTP authentication failed. Check your SMTP_USER and SMTP_PASS credentials.");
+      authError.code = "SMTP_AUTH_FAILED";
+      throw authError;
+    }
+    
     throw error;
   }
 }
