@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 import { renderVerificationEmail, renderSignupEmail, renderForgotEmail, renderMessageEmail } from "./emails.js";
 
 //Config from .env
@@ -7,6 +8,35 @@ const port = Number(process.env.SMTP_PORT || "587");
 const user = process.env.SMTP_USER;
 const pass = process.env.SMTP_PASS;
 const fromDefault = process.env.EMAIL_FROM || (user ? `Help N Seek <${user}>` : "helpnseek@gmail.com");
+
+// AWS SES API configuration (preferred for Railway)
+const awsAccessKeyId = process.env.AWS_ACCESS_KEY_ID;
+const awsSecretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
+const awsRegion = process.env.AWS_REGION || process.env.SMTP_HOST?.match(/email-smtp\.([^.]+)\.amazonaws\.com/)?.[1] || "us-east-1";
+
+// Determine if we should use AWS SES API (works on Railway) or SMTP
+const useAwsSesApi = awsAccessKeyId && awsSecretAccessKey && (host?.includes("amazonaws.com") || host?.includes("email-smtp") || !host);
+const isAwsSesHost = host?.includes("amazonaws.com") || host?.includes("email-smtp");
+
+// Initialize AWS SES client if credentials are available
+let sesClient = null;
+if (useAwsSesApi) {
+  try {
+    sesClient = new SESClient({
+      region: awsRegion,
+      credentials: {
+        accessKeyId: awsAccessKeyId,
+        secretAccessKey: awsSecretAccessKey,
+      },
+    });
+    console.log("[mail] AWS SES API client initialized (using HTTPS - works on Railway)", {
+      region: awsRegion,
+      from: fromDefault,
+    });
+  } catch (err) {
+    console.error("[mail] Failed to initialize AWS SES API client:", err.message);
+  }
+}
 
 // Validate SMTP configuration
 function validateSmtpConfig() {
@@ -27,6 +57,11 @@ function validateSmtpConfig() {
     }
     if (port !== 587 && port !== 465 && port !== 2587 && port !== 2465) {
       console.warn("[mail] WARNING: AWS SES typically uses port 587 (TLS) or 465 (SSL)");
+    }
+    // Railway-specific warning for port 587
+    if (port === 587) {
+      console.warn("[mail] NOTE: Port 587 may be blocked by Railway. If connection fails, try port 465 (SSL)");
+      console.warn("[mail] Set SMTP_PORT=465 in Railway environment variables if port 587 times out");
     }
   }
   
@@ -78,18 +113,20 @@ function createTransporter() {
 export const transporter = createTransporter();
 
 // Verify connection configuration - log in all environments
-const isAwsSesHost = host?.includes("amazonaws.com") || host?.includes("email-smtp");
-console.log("[mail] transporter status:", { 
+console.log("[mail] email configuration:", { 
+  method: useAwsSesApi ? "AWS SES API (HTTPS)" : "SMTP",
   host: host || "NOT SET", 
-  port, 
+  port: useAwsSesApi ? "N/A (using HTTPS)" : port, 
   user: user ? "****" : "NOT SET",
-  configured: isSmtpConfigured,
+  configured: useAwsSesApi ? (sesClient !== null) : isSmtpConfigured,
   from: fromDefault,
   environment: process.env.NODE_ENV || "development",
-  isAwsSes: isAwsSesHost,
-  ...(isAwsSesHost ? {
-    awsSesNote: "Ensure SMTP_HOST is region-specific (e.g., email-smtp.us-east-1.amazonaws.com)",
-    awsSesCredentialsNote: "Use SMTP credentials from AWS SES Console, not AWS Access Keys"
+  awsRegion: useAwsSesApi ? awsRegion : undefined,
+  ...(useAwsSesApi ? {
+    note: "Using AWS SES API - works on Railway (no SMTP port blocking)"
+  } : isAwsSesHost ? {
+    awsSesNote: "Using SMTP (may be blocked on Railway - consider switching to AWS SES API)",
+    awsSesCredentialsNote: "To use AWS SES API instead, set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY"
   } : {})
 });
 
@@ -108,6 +145,21 @@ if (isSmtpConfigured && transporter && process.env.VERIFY_SMTP_ON_STARTUP !== "f
       port: port,
       user: user ? "***" : "NOT SET",
     });
+    
+    // Provide specific guidance for connection timeout errors
+    if (err.code === "ETIMEDOUT" || err.code === "ECONNREFUSED" || err.code === "ECONNRESET") {
+      if (host?.includes("amazonaws.com") || host?.includes("email-smtp")) {
+        if (port === 587) {
+          console.warn("[mail] ⚠️  CONNECTION TIMEOUT on port 587 - Railway often blocks this port!");
+          console.warn("[mail] 🔧 SOLUTION: Switch to port 465 (SSL) in Railway:");
+          console.warn("[mail]    1. Go to Railway dashboard > Variables");
+          console.warn("[mail]    2. Set SMTP_PORT=465");
+          console.warn("[mail]    3. Redeploy your service");
+          console.warn("[mail]    4. Port 465 (SSL) is more reliable on Railway");
+        }
+      }
+    }
+    
     console.warn("[mail] WARNING: SMTP verification failed, but transporter will still attempt to send emails. Check your SMTP configuration.");
   });
 } else if (!isSmtpConfigured) {
@@ -162,14 +214,112 @@ async function retryWithBackoff(fn, maxRetries = 2, initialDelay = 1000) {
   throw lastError;
 }
 
+// Send email using AWS SES API (preferred method for Railway)
+async function sendEmailViaAwsSesApi({ to, subject, html, text, replyTo }) {
+  if (!sesClient) {
+    throw new Error("AWS SES API client is not initialized. Check AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY.");
+  }
+
+  // Extract email address from "Name <email>" format
+  const extractEmail = (emailString) => {
+    const match = emailString.match(/<(.+)>/);
+    return match ? match[1] : emailString;
+  };
+
+  const fromEmail = extractEmail(fromDefault);
+  const toEmail = extractEmail(to);
+
+  const params = {
+    Source: fromDefault,
+    Destination: {
+      ToAddresses: [toEmail],
+    },
+    Message: {
+      Subject: {
+        Data: subject,
+        Charset: "UTF-8",
+      },
+      Body: {
+        Html: {
+          Data: html,
+          Charset: "UTF-8",
+        },
+        ...(text ? {
+          Text: {
+            Data: text,
+            Charset: "UTF-8",
+          },
+        } : {}),
+      },
+    },
+    ...(replyTo ? { ReplyToAddresses: [extractEmail(replyTo)] } : {}),
+  };
+
+  try {
+    const command = new SendEmailCommand(params);
+    const response = await sesClient.send(command);
+    
+    console.log("[mail] email sent successfully via AWS SES API:", {
+      to: toEmail,
+      messageId: response.MessageId,
+      requestId: response.$metadata.requestId,
+    });
+
+    // Return format compatible with nodemailer response
+    return {
+      messageId: response.MessageId,
+      response: `250 Message accepted (MessageId: ${response.MessageId})`,
+      accepted: [toEmail],
+      rejected: [],
+    };
+  } catch (error) {
+    // Enhanced error handling for AWS SES API
+    if (error.name === "MessageRejected") {
+      let errorMessage = "AWS SES rejected the email. ";
+      if (error.message?.includes("Email address is not verified")) {
+        errorMessage += "\n\n🔧 AWS SES is in sandbox mode. You can only send to verified email addresses.\n";
+        errorMessage += "1. Wait for production access approval (check AWS SES Console > Account dashboard)\n";
+        errorMessage += "2. Or verify the recipient email in AWS SES Console > Verified identities\n";
+        errorMessage += "Current recipient: " + toEmail;
+      } else {
+        errorMessage += error.message || "Unknown rejection reason";
+      }
+      const rejectionError = new Error(errorMessage);
+      rejectionError.code = "SES_MESSAGE_REJECTED";
+      rejectionError.responseCode = 554;
+      throw rejectionError;
+    }
+    throw error;
+  }
+}
+
 // Send email
 export async function sendEmail({ to, subject, html, text, replyTo }) {
   if (!to || !subject || !html) {
     throw new Error("sendEmail: 'to', 'subject', and 'html' are required");
   }
 
+  // Use AWS SES API if available (works on Railway)
+  if (useAwsSesApi && sesClient) {
+    try {
+      return await sendEmailViaAwsSesApi({ to, subject, html, text, replyTo });
+    } catch (error) {
+      // If AWS SES API fails, log and rethrow (don't fall back to SMTP)
+      console.error("[mail] AWS SES API send failed:", {
+        to,
+        error: error.message,
+        code: error.code,
+        name: error.name,
+      });
+      throw error;
+    }
+  }
+
+  // Fall back to SMTP for non-AWS providers
   if (!isSmtpConfigured || !transporter) {
-    const error = new Error("SMTP is not configured. Please set SMTP_HOST, SMTP_USER, and SMTP_PASS environment variables.");
+    const error = new Error("Email is not configured. Please set either:\n" +
+      "1. AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY (for AWS SES API - recommended for Railway)\n" +
+      "2. SMTP_HOST, SMTP_USER, and SMTP_PASS (for SMTP)");
     console.error("[mail] sendEmail failed:", error.message);
     throw error;
   }
@@ -191,7 +341,7 @@ export async function sendEmail({ to, subject, html, text, replyTo }) {
     }, 2, 2000); // 2 retries with 2s initial delay
 
     // Log in all environments with more details
-    console.log("[mail] email sent successfully:", {
+    console.log("[mail] email sent successfully via SMTP:", {
       to,
       messageId: info.messageId,
       response: info.response,
@@ -237,17 +387,41 @@ export async function sendEmail({ to, subject, html, text, replyTo }) {
         errorMessage += "5. Try port 465 (SSL) instead of 587 (TLS) if your provider allows it";
       } else if (host?.includes("amazonaws.com") || host?.includes("email-smtp")) {
         errorMessage += "\n\nAWS SES SMTP troubleshooting:\n";
+        
+        // Railway-specific guidance for connection timeouts
+        if (error.code === "ETIMEDOUT" || error.code === "ECONNREFUSED") {
+          errorMessage += "⚠️  CONNECTION TIMEOUT - Railway is blocking SMTP connections!\n";
+          errorMessage += "\n🔧 BEST SOLUTION: Switch to AWS SES API (uses HTTPS - works on Railway):\n";
+          errorMessage += "   1. In Railway, remove SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS\n";
+          errorMessage += "   2. Add AWS credentials instead:\n";
+          errorMessage += "      - AWS_ACCESS_KEY_ID (your AWS access key)\n";
+          errorMessage += "      - AWS_SECRET_ACCESS_KEY (your AWS secret key)\n";
+          errorMessage += "      - AWS_REGION (e.g., us-east-2)\n";
+          errorMessage += "   3. Redeploy your service\n";
+          errorMessage += "   4. AWS SES API uses HTTPS (port 443) which Railway allows\n\n";
+          errorMessage += "   To get AWS credentials:\n";
+          errorMessage += "   - Go to AWS Console > IAM > Users > Create user\n";
+          errorMessage += "   - Attach policy: AmazonSESFullAccess\n";
+          errorMessage += "   - Create access key and use those credentials\n\n";
+        }
+        
+        errorMessage += "Alternative: Try port 465 (SSL) if you must use SMTP:\n";
+        errorMessage += "   1. In Railway, set SMTP_PORT=465\n";
+        errorMessage += "   2. Redeploy your service\n";
+        errorMessage += "   3. Note: Port 465 may also be blocked on Railway\n\n";
+        
+        errorMessage += "Other SMTP troubleshooting:\n";
         errorMessage += "1. Verify SMTP_HOST is region-specific: email-smtp.{region}.amazonaws.com\n";
-        errorMessage += "   Example: email-smtp.us-east-1.amazonaws.com\n";
+        errorMessage += "   ✓ Your current host looks correct: " + host + "\n";
         errorMessage += "2. Ensure you're using SMTP credentials (NOT AWS Access Keys)\n";
         errorMessage += "   - Create SMTP credentials in AWS SES Console > SMTP Settings\n";
         errorMessage += "   - Use the generated SMTP username and password\n";
         errorMessage += "3. Verify the sender email address in AWS SES (must be verified)\n";
+        errorMessage += "   - Current sender: " + fromDefault + "\n";
+        errorMessage += "   - This email must be verified in SES Console > Verified identities\n";
         errorMessage += "4. Check if SES is in sandbox mode (can only send to verified emails)\n";
-        errorMessage += "5. Use port 587 (TLS/STARTTLS) - recommended for AWS SES\n";
-        errorMessage += "   Or port 465 (SSL) if your setup requires it\n";
-        errorMessage += "6. Verify the AWS region matches your SES region\n";
-        errorMessage += "7. Check AWS SES sending limits and quotas";
+        errorMessage += "5. Verify the AWS region matches your SES region\n";
+        errorMessage += "6. Check AWS SES sending limits and quotas";
       } else {
         errorMessage += "\n\nPossible solutions:\n";
         errorMessage += "1. Check if your deployment platform allows outbound SMTP connections\n";
@@ -259,6 +433,29 @@ export async function sendEmail({ to, subject, html, text, replyTo }) {
       const connError = new Error(errorMessage);
       connError.code = error.code;
       throw connError;
+    }
+    
+    // Check for AWS SES sandbox mode errors
+    if (error.responseCode === 554 || 
+        error.message?.includes("Email address is not verified") ||
+        error.message?.includes("Account is in sandbox mode") ||
+        error.response?.includes("Email address is not verified") ||
+        error.response?.includes("Account is in sandbox mode")) {
+      let sandboxErrorMessage = "AWS SES is in sandbox mode. You can only send emails to verified email addresses.\n\n";
+      sandboxErrorMessage += "🔧 SOLUTIONS:\n";
+      sandboxErrorMessage += "1. Wait for production access approval (you've already requested it)\n";
+      sandboxErrorMessage += "   - Check AWS SES Console > Account dashboard for status\n";
+      sandboxErrorMessage += "   - Usually approved within 24 hours\n";
+      sandboxErrorMessage += "2. For testing: Verify the recipient email in AWS SES\n";
+      sandboxErrorMessage += "   - Go to SES Console > Verified identities > Create identity\n";
+      sandboxErrorMessage += "   - Add the email address you want to test with\n";
+      sandboxErrorMessage += "   - Check inbox and click verification link\n";
+      sandboxErrorMessage += "3. Once production access is approved, you can send to any email\n\n";
+      sandboxErrorMessage += "Current recipient: " + to;
+      
+      const sandboxError = new Error(sandboxErrorMessage);
+      sandboxError.code = "SES_SANDBOX_MODE";
+      throw sandboxError;
     }
     
     if (error.responseCode === 535 || error.message?.includes("authentication") || error.message?.includes("Invalid login")) {
